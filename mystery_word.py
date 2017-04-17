@@ -9,6 +9,7 @@ def mystery_word():
     med_words = []
     long_words = []
     secret_blanks = []
+    letters_in = []
     dictionary_list = dictionary.readlines()
     difficulty = 4
     correct_guesses = 0
@@ -38,16 +39,20 @@ def mystery_word():
         secret_blanks.append('_')
     # print(secret_word)
     while bad_guesses < 5:
+        print(secret_word)
         user_in = input('guess a letter: ')
         count = 0
         good_guess = False
+        curr_letter = 'picklepuss'
         for letter in secret_word:
-            if user_in == letter:
+            if user_in == letter and letter not in letters_in:
                 secret_blanks[count] = letter
                 correct_guesses += 1
                 good_guess = True
+                curr_letter = letter
             count += 1
-        if not good_guess:
+        letters_in += curr_letter
+        if not good_guess and letter not in letters_in:
             bad_guesses += 1
         for letter in secret_blanks:
             print(letter + ' ', end='')
