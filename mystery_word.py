@@ -45,14 +45,16 @@ def mystery_word():
         good_guess = False
         curr_letter = 'picklepuss'
         for letter in secret_word:
-            if user_in == letter and letter not in letters_in:
+            if user_in == letter and letter != "" and letter not in letters_in:
                 secret_blanks[count] = letter
                 correct_guesses += 1
                 good_guess = True
                 curr_letter = letter
             count += 1
-        letters_in += curr_letter
-        if not good_guess and letter not in letters_in:
+        curr_letter = user_in
+        if(curr_letter not in letters_in and good_guess):
+            letters_in += curr_letter
+        if not good_guess and curr_letter != '' and curr_letter not in letters_in:
             bad_guesses += 1
         for letter in secret_blanks:
             print(letter + ' ', end='')
